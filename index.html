@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Small Gift</title>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+<style>
+
+/* ---------- GLOBAL ---------- */
+
+body{
+margin:0;
+font-family:Poppins, sans-serif;
+color:#333;
+overflow:hidden;
+background:linear-gradient(#ffffff,#ffe6f2);
+}
+
+/* subtle parallax background */
+
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 50% 90%, #ffffff 0%, #ffe6f2 60%),
+linear-gradient(#ffffff,#ffe6f2);
+z-index:-2;
+}
+
+/* chakra */
+
+.chakra{
+position:fixed;
+top:40px;
+right:40px;
+font-size:90px;
+opacity:.05;
+animation:spin 40s linear infinite;
+z-index:-1;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+/* falling petals */
+
+.petal{
+position:fixed;
+top:-20px;
+font-size:16px;
+opacity:.7;
+pointer-events:none;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+}
+}
+
+/* ---------- CARD ---------- */
+
+.card{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:90%;
+max-width:420px;
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(10px);
+border-radius:18px;
+padding:28px;
+box-shadow:0 20px 40px rgba(0,0,0,.12);
+text-align:center;
+}
+
+.section{display:none}
+.active{display:block}
+
+p{line-height:1.6}
+
+button{
+padding:12px 22px;
+border:none;
+border-radius:30px;
+margin:10px;
+font-size:15px;
+cursor:pointer;
+transition:.25s;
+}
+
+.yes{
+background:#ff6fa5;
+color:white;
+}
+
+.no{
+background:#e2e2e2;
+}
+
+/* ---------- SUNSET SCENE ---------- */
+
+#scene{
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+background:linear-gradient(#ffd6e7,#ffb86b);
+overflow:hidden;
+}
+
+.sun{
+width:100px;
+height:100px;
+background:#ffcc55;
+border-radius:50%;
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+top:60px;
+animation:sunset 7s forwards;
+}
+
+@keyframes sunset{
+to{top:240px}
+}
+
+.ground{
+position:absolute;
+bottom:0;
+width:100%;
+height:120px;
+background:#3a7a3a;
+}
+
+/* message */
+
+.message{
+position:absolute;
+bottom:140px;
+width:80%;
+left:50%;
+transform:translateX(-50%);
+padding:18px;
+border-radius:12px;
+background:rgba(255,255,255,0.55);
+backdrop-filter:blur(6px);
+text-align:center;
+font-family:"Playfair Display";
+font-size:18px;
+opacity:0;
+animation:fade 1s forwards;
+animation-delay:9s;
+}
+
+@keyframes fade{
+to{opacity:1}
+}
+
+/* sunflower SVG size */
+
+#flowers{
+position:absolute;
+bottom:180px;
+width:100%;
+}
+.flowers{
+position:absolute;
+bottom:120px;
+width:100%;
+display:flex;
+justify-content:center;
+gap:60px;
+align-items:flex-end;
+}
+
+.flowers lottie-player:first-child{
+transform:rotate(10deg);
+}
+
+.flowers lottie-player:last-child{
+transform:rotate(-10deg);
+}
+.sunflower{
+transform-origin:center bottom;
+transition:transform 2s ease;
+cursor:pointer;
+}
+
+/* buttercup popup */
+
+#buttercup{
+position:absolute;
+top:40%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="chakra">🛞</div>
+
+<audio id="music" src="tum-prem-ho.mp3" loop></audio>
+
+<!-- ---------- QUESTIONS ---------- -->
+
+<div class="card">
+
+<div id="open" class="section active">
+
+<p>
+Ab zyada creativity panne par karna toh hard lagta hai humko...<br><br>
+toh meri <b>"special one"</b> ke liye, jinke liye yu toh main sab kuch joh woh chahe karna chahta hu,
+unke liye ek chota sa tofha banaya hai 🫶🏻.<br><br>
+Toh agar woh aap hi ho.. to neeche click karo...
+</p>
+
+<button class="yes" onclick="start()">Open 🌻</button>
+
+</div>
+
+
+<div id="q1" class="section">
+<p>Puri jaane ke baad toh bohot log aur chizein miss karenge... woh miss karte hue may miss toh nhi ho jaunga na?</p>
+<button class="yes" onclick="next('q2')">Yes</button>
+<button class="no" onclick="escape(this)">No</button>
+</div>
+
+<div id="q2" class="section">
+<p>Kabhi agar main message karu — "Ohh Mansiiii Ji ✨...kaisi hai aap , kaisa raha aapka din" to reply aa jayega?</p>
+<button class="yes" onclick="next('q3')">Yes</button>
+<button class="no" onclick="escape(this)">No</button>
+</div>
+
+<div id="q3" class="section">
+<p>Jagga se milne jab jab unke pass jayenge... kya mere liye bhi ek chhoti si dua karogi?</p>
+<button class="yes" onclick="next('q4')">Yes</button>
+<button class="no" onclick="escape(this)">No</button>
+</div>
+
+<div id="q4" class="section">
+<p>Yaad mujhe toh ussi bhav se aaogi joh mere dil mein hai... mujhe yaad karne ki permission hai na?</p>
+<button class="yes" onclick="sunset()">Yes</button>
+<button class="no" onclick="escape(this)">No</button>
+</div>
+
+</div>
+
+
+<!-- ---------- SUNSET SCENE ---------- -->
+
+<div id="scene">
+
+<div class="sun"></div>
+<div class="ground"></div>
+<div id="flowers" class="flowers">
+
+<lottie-player
+src="Sunflower.json"
+background="transparent"
+speed="1"
+style="width:180px;height:180px"
+loop
+autoplay>
+</lottie-player>
+
+<lottie-player
+src="Sunflower.json"
+background="transparent"
+speed="1"
+style="width:180px;height:180px"
+loop
+autoplay>
+</lottie-player>
+
+</div>
+<div class="message">
+
+Sunflower theory mein jab sooraj ki roshni nahi hoti<br>
+toh sunflower ek dusre ki taraf mudte hai<br>
+maano woh ek dusre ki light ho.<br><br>
+
+Hum dono bhi waise hi ek dusre ke sunflowers banke rahenge…  
+hai na… 👉🏻👈🏻 ???
+
+<br><br>
+
+<button class="yes" onclick="sendLove()">Send a 🫶🏻 before leaving</button>
+
+</div>
+
+</div>
+
+<div id="buttercup">
+Buttercup approves this moment 💚
+</div>
+
+<script>
+
+/* start music */
+
+function start(){
+document.getElementById("music").play()
+next("q1")
+}
+
+/* navigation */
+
+function next(id){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"))
+document.getElementById(id).classList.add("active")
+}
+
+/* mobile escaping no button */
+
+function escape(btn){
+btn.style.position="relative"
+btn.style.left=(Math.random()*180-90)+"px"
+btn.style.top=(Math.random()*120-60)+"px"
+}
+
+/* sunset scene */
+
+function sunset(){
+
+document.querySelector(".card").style.display="none"
+document.getElementById("scene").style.display="block"
+}
+
+/* petals */
+
+setInterval(()=>{
+let p=document.createElement("div")
+p.className="petal"
+p.innerHTML="🌸"
+p.style.left=Math.random()*100+"vw"
+p.style.animationDuration=(Math.random()*6+5)+"s"
+document.body.appendChild(p)
+},500)
+
+/* hearts */
+
+function sendLove(){
+for(let i=0;i<20;i++){
+let h=document.createElement("div")
+h.className="petal"
+h.innerHTML="🫶🏻"
+h.style.left=Math.random()*100+"vw"
+h.style.animationDuration="6s"
+document.body.appendChild(h)
+}
+}
+
+/* buttercup easter egg */
+
+let taps=0
+document.getElementById("flowers").addEventListener("click",()=>{
+taps++
+if(taps==3){
+document.getElementById("buttercup").style.display="block"
+setTimeout(()=>{document.getElementById("buttercup").style.display="none"},3000)
+}
+})
+
+</script>
+
+</body>
+</html>
