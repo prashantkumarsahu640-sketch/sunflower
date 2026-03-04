@@ -124,6 +124,7 @@ left:50%;
 transform:translateX(-50%);
 top:60px;
 animation:sunset 7s forwards;
+box-shadow:0 0 60px rgba(255,204,85,.6);
 }
 
 @keyframes sunset{
@@ -142,7 +143,7 @@ background:#3a7a3a;
 
 .flowers{
 position:absolute;
-bottom:150px;
+bottom:80px;
 width:100%;
 display:flex;
 justify-content:center;
@@ -163,7 +164,7 @@ transform:rotate(-8deg);
 
 .message{
 position:absolute;
-bottom:150px;
+bottom:190px;
 width:80%;
 left:50%;
 transform:translateX(-50%);
@@ -225,29 +226,54 @@ Toh agar woh aap hi ho.. to neeche click karo...
 </div>
 
 <div id="q1" class="section">
-<p>Puri jaane ke baad toh bohot log aur chizein miss karenge... woh miss karte hue may miss toh nhi ho jaunga na?</p>
+<p>Puri jaane ke baad toh bohot log aur chizein miss karenge...
+
+par ek chhota sa doubt hai 🤔
+
+un sab ke beech mein...
+
+main bhi thoda sa miss ho jaunga na?</p>
 <button class="yes" onclick="next('q2')">Yes</button>
 <button class="no" onclick="escape(this)">No</button>
 </div>
 
 <div id="q2" class="section">
-<p>Kabhi agar main message karu — "Ohh Mansiiii Ji ✨...kaisi hai aap , kaisa raha aapka din" to reply aa jayega?</p>
+<p>Kabhi agar main message karu —
+
+"Ohh Mansiiii Ji ✨
+kaisi hai aap?
+kaisa raha aapka din?"
+
+toh reply aa jayega…
+
+ya phir main sirf typing karte reh jaunga? 🥲</p>
 <button class="yes" onclick="next('q3')">Yes</button>
 <button class="no" onclick="escape(this)">No</button>
 </div>
 
 <div id="q3" class="section">
-<p>Jagga se milne jab jab unke pass jayenge... kya mere liye bhi ek chhoti si dua karogi?</p>
+<p>Jagga se milne jab jab unke paas jaogi...
+
+kya mere liye bhi ek chhoti si dua karogi?
+
+bas itni si —
+
+"Iss Budhu ko sambhal ke rakhna" 🙂</p>
 <button class="yes" onclick="next('q4')">Yes</button>
 <button class="no" onclick="escape(this)">No</button>
 </div>
 
 <div id="q4" class="section">
-<p>Yaad mujhe toh ussi bhav se aaogi joh mere dil mein hai... mujhe yaad karne ki permission hai na?</p>
+<p>Yaad mujhe toh waise hi aaogi
+joh mere dil mein hai...
+
+par officially puch leta hu —
+
+mujhe yaad karne ki permission hai na?</p>
 <button class="yes" onclick="sunset()">Yes</button>
 <button class="no" onclick="escape(this)">No</button>
 </div>
-
+<p id="tease" style="font-size:14px;color:#777;margin-top:10px;"></p>
 </div>
 
 <!-- ---------- SUNSET SCENE ---------- -->
@@ -263,7 +289,7 @@ Toh agar woh aap hi ho.. to neeche click karo...
 src="Sunflower.json"
 background="transparent"
 speed="1"
-style="width:200px;height:200px"
+style="width:180px;height:180px"
 loop
 autoplay>
 </lottie-player>
@@ -272,7 +298,7 @@ autoplay>
 src="Sunflower.json"
 background="transparent"
 speed="1"
-style="width:200px;height:200px"
+style="width:180px;height:180px"
 loop
 autoplay>
 </lottie-player>
@@ -290,7 +316,7 @@ hai na… 👉🏻👈🏻 ???
 
 <br><br>
 
-<button class="yes" onclick="sendLove()">Send a 🫶🏻 before leaving</button>
+<button class="yes" onclick="sendLove()">Jaane se pehle ek 🫶🏻 bhej do</button>
 
 </div>
 
@@ -325,6 +351,17 @@ let moveY = Math.random()*30 - 15
 
 btn.style.transform = `translate(${moveX}px, ${moveY}px)`
 
+let lines = [
+"arey arey… galat button lag raha hai 😌",
+"soch lo phir se…",
+"yeh option allowed nahi hai 🤨",
+"network issue lag raha hai",
+"phir try karo 😄"
+]
+
+document.getElementById("tease").innerText =
+lines[Math.floor(Math.random()*lines.length)]
+
 }
 
 /* sunset scene */
@@ -339,12 +376,19 @@ document.getElementById("scene").style.display="block"
 /* petals */
 
 setInterval(()=>{
+
 let p=document.createElement("div")
 p.className="petal"
 p.innerHTML="🌸"
 p.style.left=Math.random()*100+"vw"
 p.style.animationDuration=(Math.random()*7+6)+"s"
+
 document.body.appendChild(p)
+
+setTimeout(()=>{
+p.remove()
+},12000)
+
 },2500)
 
 /* hearts */
@@ -388,3 +432,4 @@ document.getElementById("buttercup").style.display="none"
 
 </body>
 </html>
+
