@@ -252,13 +252,15 @@ ya phir main sirf typing karte reh jaunga? 🥲</p>
 </div>
 
 <div id="q3" class="section">
-<p>Jagga se milne jab jab unke paas jaogi...
+<p>
+Jagga se milne jab jab unke paas jaogi...
 
-kya mere liye bhi ek chhoti si dua karogi?
+toh kya mere liye bhi ek chhoti si dua karogi?
 
 bas itni si —
 
-"Iss Budhu ko sambhal ke rakhna" 🙂</p>
+"isse kabhi kabhi yaad bhi dilate rehna." 🙂
+</p>
 <button class="yes" onclick="next('q4')">Yes</button>
 <button class="no" onclick="escape(this)">No</button>
 </div>
@@ -317,6 +319,17 @@ hai na… 👉🏻👈🏻 ???
 <br><br>
 
 <button class="yes" onclick="sendLove()">Jaane se pehle ek 🫶🏻 bhej do</button>
+
+<div id="hateQuestion" style="display:none; margin-top:18px;">
+
+<p>So… you hate me now? 😶</p>
+
+<button class="no" onclick="hateAnswer('yes')">Yes</button>
+<button class="yes" onclick="hateAnswer('no')">No</button>
+
+<p id="hateReply" style="margin-top:10px;"></p>
+
+</div>
 
 </div>
 
@@ -402,12 +415,26 @@ h.className="petal"
 h.innerHTML="🫶🏻"
 h.style.left=Math.random()*100+"vw"
 h.style.animationDuration="6s"
+
 document.body.appendChild(h)
 
 }
 
+/* show the surprise question */
+
+document.getElementById("hateQuestion").style.display="block"
+
+}
+function hateAnswer(answer){
+
+if(answer==="yes"){
+document.getElementById("hateReply").innerText="Katti 😤"
+}
+else{
+document.getElementById("hateReply").innerText="I knew you love me 😌"
 }
 
+}
 /* buttercup easter egg */
 
 let taps=0
@@ -432,4 +459,5 @@ document.getElementById("buttercup").style.display="none"
 
 </body>
 </html>
+
 
