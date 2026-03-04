@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>A Small Gift</title>
+
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 
 <style>
@@ -13,13 +16,13 @@
 
 body{
 margin:0;
-font-family:Poppins, sans-serif;
+font-family:Poppins,sans-serif;
 color:#333;
+background:linear-gradient(180deg,#ffffff,#fff0f6);
 overflow:hidden;
-background:linear-gradient(#ffffff,#ffe6f2);
 }
 
-/* subtle parallax background */
+/* soft background layer */
 
 .bg{
 position:fixed;
@@ -30,13 +33,14 @@ radial-gradient(circle at 50% 90%, #ffffff 0%, #ffe6f2 60%),
 linear-gradient(#ffffff,#ffe6f2);
 z-index:-2;
 }
+
 /* falling petals */
 
 .petal{
 position:fixed;
 top:-20px;
 font-size:16px;
-opacity:.7;
+opacity:.6;
 pointer-events:none;
 animation:fall linear forwards;
 }
@@ -56,7 +60,7 @@ left:50%;
 transform:translate(-50%,-50%);
 width:90%;
 max-width:420px;
-background:rgba(255,255,255,.75);
+background:rgba(255,255,255,.85);
 backdrop-filter:blur(10px);
 border-radius:18px;
 padding:28px;
@@ -67,7 +71,13 @@ text-align:center;
 .section{display:none}
 .active{display:block}
 
-p{line-height:1.6}
+.card p{
+font-size:17px;
+line-height:1.7;
+margin-bottom:18px;
+}
+
+/* buttons */
 
 button{
 padding:12px 22px;
@@ -76,12 +86,14 @@ border-radius:30px;
 margin:10px;
 font-size:15px;
 cursor:pointer;
-transition:.25s;
+transition:transform .2s ease, box-shadow .2s ease;
 }
-.card p{
-font-size:17px;
-margin-bottom:16px;
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
+
 .yes{
 background:#ff6fa5;
 color:white;
@@ -98,7 +110,7 @@ position:absolute;
 width:100%;
 height:100%;
 display:none;
-background:linear-gradient(#ffd6e7,#ffb86b);
+background:linear-gradient(180deg,#ffe1ec 0%,#ffcda8 60%,#ffd6e7 100%);
 overflow:hidden;
 }
 
@@ -126,63 +138,53 @@ height:120px;
 background:#3a7a3a;
 }
 
-/* message */
+/* ---------- FLOWERS ---------- */
 
-.message{
-position:absolute;
-bottom:140px;
-width:80%;
-left:50%;
-transform:translateX(-50%);
-padding:18px;
-border-radius:12px;
-background:rgba(255,255,255,0.55);
-backdrop-filter:blur(6px);
-text-align:center;
-font-family:"Playfair Display";
-font-size:20px;
-line-height:1.7,
-opacity:0;
-animation:fade 1s forwards;
-animation:fade 2s ease;
-animation-delay:9s;
-}
-
-@keyframes fade{
-to{opacity:1}
-}
-
-/* sunflower SVG size */
-
-#flowers{
-position:absolute;
-bottom:180px;
-width:100%;
-}
 .flowers{
 position:absolute;
 bottom:150px;
 width:100%;
 display:flex;
 justify-content:center;
-gap:60px;
+gap:50px;
 align-items:flex-end;
+animation:fade 1.5s ease;
 }
 
 .flowers lottie-player:first-child{
-transform:rotate(10deg);
+transform:rotate(8deg);
 }
 
 .flowers lottie-player:last-child{
-transform:rotate(-10deg);
-}
-.sunflower{
-transform-origin:center bottom;
-transition:transform 2s ease;
-cursor:pointer;
+transform:rotate(-8deg);
 }
 
-/* buttercup popup */
+/* ---------- MESSAGE ---------- */
+
+.message{
+position:absolute;
+bottom:150px;
+width:80%;
+left:50%;
+transform:translateX(-50%);
+padding:20px;
+border-radius:16px;
+background:rgba(255,255,255,.65);
+backdrop-filter:blur(6px);
+text-align:center;
+font-family:"Playfair Display";
+font-size:20px;
+line-height:1.7;
+opacity:0;
+animation:fade 1s forwards;
+animation-delay:2s;
+}
+
+@keyframes fade{
+to{opacity:1}
+}
+
+/* ---------- EASTER EGG ---------- */
 
 #buttercup{
 position:absolute;
@@ -195,15 +197,14 @@ border-radius:12px;
 box-shadow:0 10px 30px rgba(0,0,0,.2);
 display:none;
 }
-button:hover{
-transform:scale(1.05);
-}
+
 </style>
 </head>
 
 <body>
 
 <div class="bg"></div>
+
 <audio id="music" src="tum-prem-ho.mp3" loop></audio>
 
 <!-- ---------- QUESTIONS ---------- -->
@@ -222,7 +223,6 @@ Toh agar woh aap hi ho.. to neeche click karo...
 <button class="yes" onclick="start()">Open 🌻</button>
 
 </div>
-
 
 <div id="q1" class="section">
 <p>Puri jaane ke baad toh bohot log aur chizein miss karenge... woh miss karte hue may miss toh nhi ho jaunga na?</p>
@@ -250,20 +250,20 @@ Toh agar woh aap hi ho.. to neeche click karo...
 
 </div>
 
-
 <!-- ---------- SUNSET SCENE ---------- -->
 
 <div id="scene">
 
 <div class="sun"></div>
 <div class="ground"></div>
+
 <div id="flowers" class="flowers">
 
 <lottie-player
 src="Sunflower.json"
 background="transparent"
 speed="1"
-style="width:180px;height:180px"
+style="width:200px;height:200px"
 loop
 autoplay>
 </lottie-player>
@@ -272,12 +272,13 @@ autoplay>
 src="Sunflower.json"
 background="transparent"
 speed="1"
-style="width:180px;height:180px"
+style="width:200px;height:200px"
 loop
 autoplay>
 </lottie-player>
 
 </div>
+
 <div class="message">
 
 Sunflower theory mein jab sooraj ki roshni nahi hoti<br>
@@ -315,12 +316,15 @@ document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"))
 document.getElementById(id).classList.add("active")
 }
 
-/* mobile escaping no button */
+/* playful no button */
 
 function escape(btn){
-btn.style.position="relative"
-btn.style.left=(Math.random()*180-90)+"px"
-btn.style.top=(Math.random()*120-60)+"px"
+
+let moveX = Math.random()*120 - 60
+let moveY = Math.random()*30 - 15
+
+btn.style.transform = `translate(${moveX}px, ${moveY}px)`
+
 }
 
 /* sunset scene */
@@ -329,6 +333,7 @@ function sunset(){
 
 document.querySelector(".card").style.display="none"
 document.getElementById("scene").style.display="block"
+
 }
 
 /* petals */
@@ -338,36 +343,48 @@ let p=document.createElement("div")
 p.className="petal"
 p.innerHTML="🌸"
 p.style.left=Math.random()*100+"vw"
-p.style.animationDuration=(Math.random()*6+5)+"s"
+p.style.animationDuration=(Math.random()*7+6)+"s"
 document.body.appendChild(p)
-},2000)
+},2500)
 
 /* hearts */
 
 function sendLove(){
-for(let i=0;i<20;i++){
+
+for(let i=0;i<15;i++){
+
 let h=document.createElement("div")
 h.className="petal"
 h.innerHTML="🫶🏻"
 h.style.left=Math.random()*100+"vw"
 h.style.animationDuration="6s"
 document.body.appendChild(h)
+
 }
+
 }
 
 /* buttercup easter egg */
 
 let taps=0
+
 document.getElementById("flowers").addEventListener("click",()=>{
+
 taps++
+
 if(taps==3){
+
 document.getElementById("buttercup").style.display="block"
-setTimeout(()=>{document.getElementById("buttercup").style.display="none"},3000)
+
+setTimeout(()=>{
+document.getElementById("buttercup").style.display="none"
+},3000)
+
 }
+
 })
 
 </script>
 
 </body>
-
 </html>
