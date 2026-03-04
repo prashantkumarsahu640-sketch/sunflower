@@ -30,23 +30,6 @@ radial-gradient(circle at 50% 90%, #ffffff 0%, #ffe6f2 60%),
 linear-gradient(#ffffff,#ffe6f2);
 z-index:-2;
 }
-
-/* chakra */
-
-.chakra{
-position:fixed;
-top:40px;
-right:40px;
-font-size:90px;
-opacity:.05;
-animation:spin 40s linear infinite;
-z-index:-1;
-}
-
-@keyframes spin{
-to{transform:rotate(360deg)}
-}
-
 /* falling petals */
 
 .petal{
@@ -95,7 +78,10 @@ font-size:15px;
 cursor:pointer;
 transition:.25s;
 }
-
+.card p{
+font-size:17px;
+margin-bottom:16px;
+}
 .yes{
 background:#ff6fa5;
 color:white;
@@ -154,9 +140,11 @@ background:rgba(255,255,255,0.55);
 backdrop-filter:blur(6px);
 text-align:center;
 font-family:"Playfair Display";
-font-size:18px;
+font-size:20px;
+line-height:1.7,
 opacity:0;
 animation:fade 1s forwards;
+animation:fade 2s ease;
 animation-delay:9s;
 }
 
@@ -173,7 +161,7 @@ width:100%;
 }
 .flowers{
 position:absolute;
-bottom:120px;
+bottom:150px;
 width:100%;
 display:flex;
 justify-content:center;
@@ -207,15 +195,15 @@ border-radius:12px;
 box-shadow:0 10px 30px rgba(0,0,0,.2);
 display:none;
 }
-
+button:hover{
+transform:scale(1.05);
+}
 </style>
 </head>
 
 <body>
 
 <div class="bg"></div>
-<div class="chakra">🛞</div>
-
 <audio id="music" src="tum-prem-ho.mp3" loop></audio>
 
 <!-- ---------- QUESTIONS ---------- -->
@@ -352,7 +340,7 @@ p.innerHTML="🌸"
 p.style.left=Math.random()*100+"vw"
 p.style.animationDuration=(Math.random()*6+5)+"s"
 document.body.appendChild(p)
-},500)
+},2000)
 
 /* hearts */
 
@@ -381,4 +369,5 @@ setTimeout(()=>{document.getElementById("buttercup").style.display="none"},3000)
 </script>
 
 </body>
+
 </html>
